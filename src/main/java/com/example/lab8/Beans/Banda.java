@@ -1,23 +1,16 @@
 package com.example.lab8.Beans;
 
 public class Banda {
-    private String idBanda;
+    private int id;
     private String nombre_banda;
-    private int idlider;
+    private String nombre_cancion;
 
-
-    public Banda(String idBanda, String nombre_banda, int idlider) {
-        this.idBanda = idBanda;
-        this.nombre_banda = nombre_banda;
-        this.idlider = idlider;
+    public int getId() {
+        return id;
     }
 
-    public String getIdBanda() {
-        return idBanda;
-    }
-
-    public void setIdBanda(String idBanda) {
-        this.idBanda = idBanda;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre_banda() {
@@ -28,11 +21,12 @@ public class Banda {
         this.nombre_banda = nombre_banda;
     }
 
-    public int getIdlider() {
-        return idlider;
+    public String getNombre_cancion() {
+        return nombre_cancion;
     }
 
-    public void setIdlider(int idlider) {
-        this.idlider = idlider;
+    public void setNombre_cancion(String nombre_cancion) {
+        this.nombre_cancion = nombre_cancion;
     }
 }
+
