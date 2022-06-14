@@ -31,9 +31,8 @@
                         <td><%=cancion.getIdcancion()%></td>
                         <td><%=cancion.getCancion()%></td>
                         <td><%=cancion.getBanda()%></td>
-                        <td><input type="hidden" name="idCancion" id="idCancion" value="<%=cancion.getIdcancion()%>"><button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: darkred">
-                            (< / 3)
-                        </button></td>
+                        <td><a href="<%=request.getContextPath()%>/listaFavoritos?a=borrar&id=<%=cancion.getIdcancion()%>"
+                               class="btn btn-danger">(< / 3)</a></td>
                     </tr>
                     <%
                         } %>
