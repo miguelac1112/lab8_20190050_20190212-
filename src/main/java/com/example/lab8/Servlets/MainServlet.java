@@ -1,4 +1,5 @@
 package com.example.lab8.Servlets;
+import com.example.lab8.Daos.BandaDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +16,8 @@ public class MainServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        BandaDao bandaDao = new BandaDao();
+        bandaDao.obtenerListarecomendado();
         RequestDispatcher view =request.getRequestDispatcher("index.jsp");
         view.forward(request,response);
     }
