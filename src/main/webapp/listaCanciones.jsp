@@ -39,15 +39,21 @@
                         <th>#</th>
                         <th>CANCION</th>
                         <th>BANDA</th>
+                        <th>AGREGAR FAVORITOS</th>
                     </thead>
                     <%
                         for (Cancion cancion : listaCanciones) {
                     %>
+                    <form method="POST" action="<%=request.getContextPath()%>/listaCanciones?a=favorito&id=<%=cancion.getIdcancion()%>">
                     <tr>
                         <td><%=cancion.getIdcancion()%></td>
                         <td><%=cancion.getCancion()%></td>
                         <td><%=cancion.getBanda()%></td>
+                        <td><input type="hidden" name="idCancion" id="idCancion" value="<%=cancion.getIdcancion()%>"><button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            (♡)
+                        </button></td>
                     </tr>
+                    </form>
                     <%
                     } %>
                 </table>

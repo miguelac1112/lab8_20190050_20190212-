@@ -4,8 +4,15 @@ public class Cancion {
     private int idcancion;
     private String cancion;
     private String banda;
+    private int favorito;
 
+    public int getFavorito() {
+        return favorito;
+    }
 
+    public void setFavorito(int favorito) {
+        this.favorito = favorito;
+    }
 
     public int getIdcancion() {
         return idcancion;
