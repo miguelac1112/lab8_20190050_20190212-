@@ -23,6 +23,11 @@ public class FavoritaServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("listaFavoritos.jsp");
                 requestDispatcher.forward(request,response);
             }
+            case "borrar" -> {
+                String id = request.getParameter("id");
+                cancionDao.no_favorito(id);
+                response.sendRedirect(request.getContextPath() + "/listaFavoritos");
+            }
         }
     }
 

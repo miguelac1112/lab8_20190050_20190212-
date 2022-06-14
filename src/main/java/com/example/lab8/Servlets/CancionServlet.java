@@ -1,5 +1,6 @@
 package com.example.lab8.Servlets;
 
+import com.example.lab8.Beans.Cancion;
 import com.example.lab8.Daos.CancionDao;
 
 import javax.servlet.RequestDispatcher;
@@ -46,6 +47,30 @@ public class CancionServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
             }
 
+            case "favorito" -> {
+                String id = request.getParameter("id");
+                cancionDao.favorito(id);
+                response.sendRedirect(request.getContextPath() + "/listaFavoritos");
+            }
+
         }
+    }
+    public Cancion leerParametrosRequest(HttpServletRequest request) {
+        String jobId = request.getParameter("jobId");
+        String jobTitle = request.getParameter("jobTitle");
+        String minSalaryStr = request.getParameter("minSalary");
+        String maxSalaryStr = request.getParameter("maxSalary");
+
+        String idcancion = request.getParameter("cancionId");
+        String cancion_nombre = request.getParameter("cancionNombre");;
+        String banda = request.getParameter("banda");
+        String favorito = request.getParameter("favorito");
+
+        Cancion cancion = new Cancion();
+        cancion.setIdcancion(Integer.parseInt(idcancion));
+        cancion.setCancion(cancion_nombre);
+        cancion.setBanda(banda);
+        cancion.setFavorito(Integer.parseInt(favorito));
+        return cancion;
     }
 }
