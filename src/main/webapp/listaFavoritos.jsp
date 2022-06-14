@@ -8,7 +8,7 @@
     <body>
         <div class='container'>
             <jsp:include page="/includes/navbar.jsp">
-                <jsp:param name="page" value="tpc"/>
+                <jsp:param name="page" value="canciones"/>
             </jsp:include>
             <div class="row gx-lg-5">
                 <div class="col-lg-6">

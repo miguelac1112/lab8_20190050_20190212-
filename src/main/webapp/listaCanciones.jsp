@@ -10,7 +10,7 @@
     <body>
         <div class='container'>
             <jsp:include page="/includes/navbar.jsp">
-                <jsp:param name="page" value="tpc"/>
+                <jsp:param name="page" value="canciones"/>
             </jsp:include>
             <div class="row-5 pt-4 px-3 titlecolor">
                 <div class="row gx-lg-5">

@@ -12,14 +12,16 @@ public class BandaDao {
 
     //En este caso se usa preparedStatement
     public ArrayList<Banda> obtenerListarecomendado(){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         ArrayList<Banda> listabandas = new ArrayList<>();
-
-        String sql = "select idcancion, nombre_cancion, banda from cancion c, reproduccion r where c.idcancion=r.cancion_idcancion group by cancion_idcancion having count(*) >2 order by count(*) desc";
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql);) {
-
-            while (rs.next()) {
+             ResultSet rs = stmt.executeQuery("select idcancion, nombre_cancion, banda from cancion c, reproduccion r where c.idcancion=r.cancion_idcancion group by cancion_idcancion having count(*) >2 order by count(*) desc");) {
+             while (rs.next()) {
                 Banda banda = new Banda();
                 banda.setId(rs.getInt(1));
                 banda.setNombre_cancion(rs.getString(2));
