@@ -5,6 +5,7 @@ import com.example.lab8.Beans.Cancion;
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class CancionDao {
     private static String user = "root";
     private static String pass = "root";
@@ -24,12 +25,12 @@ public class CancionDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "select * from cancion where banda='?' ";
+        String sql = "select * from cancion where banda=? ";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
 
-            preparedStatement.setString(1,textoBuscar.toLowerCase());
+            preparedStatement.setString(1,textoBuscar.toUpperCase());
 
             try (ResultSet rs = preparedStatement.executeQuery();) {
                 while (rs.next()) {

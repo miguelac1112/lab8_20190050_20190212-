@@ -18,18 +18,12 @@ public class CancionServlet extends HttpServlet {
 
         String action = request.getParameter("a") == null? "inicio" : request.getParameter("a");
         CancionDao cancionDao = new CancionDao();
-        switch (action) {
+        switch (action){
             case "inicio" -> {
-                request.setAttribute("inicio","vacio");
+                request.setAttribute("listaCanciones",cancionDao.obtenerTodasCanciones());
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("listaCanciones.jsp");
                 requestDispatcher.forward(request,response);
-            }
-            case "listar" -> {
-                request.setAttribute("listaCanciones", cancionDao.obtenerTodasCanciones());
-
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("listaCanciones.jsp");
-                requestDispatcher.forward(request, response);
             }
         }
 
@@ -48,7 +42,7 @@ public class CancionServlet extends HttpServlet {
                 request.setAttribute("textoBuscar",textoBuscar);
                 request.setAttribute("listaCanciones", cancionDao.CancionesPorBanda(textoBuscar));
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("jobs/lista.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("listaCanciones.jsp");
                 requestDispatcher.forward(request, response);
             }
 
