@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `lab6sw1`.`cancion` (
   `nombre_cancion` VARCHAR(40) NOT NULL,
   `banda` VARCHAR(3) NOT NULL,
   `favorito` INT NULL DEFAULT NULL,
-  `lista_personalizada` VARCHAR(45) NULL DEFAULT NULL,
+  `id_listapersonalizada` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idcancion`),
   INDEX `fk_cancion_banda1_idx` (`banda` ASC) VISIBLE,
   CONSTRAINT `fk_cancion_banda1`
@@ -109,6 +109,18 @@ CREATE TABLE IF NOT EXISTS `lab6sw1`.`ciudad` (
     FOREIGN KEY (`pais`)
     REFERENCES `lab6sw1`.`pais` (`idpais`))
 ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `lab6sw1`.`lista_personalizada`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `lab6sw1`.`lista_personalizada` (
+  `idlista_personalizada` INT NOT NULL AUTO_INCREMENT,
+  `nombre_lista` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idlista_personalizada`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb3;
 
 
