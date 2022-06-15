@@ -2,6 +2,7 @@ package com.example.lab8.Servlets;
 
 import com.example.lab8.Beans.Cancion;
 import com.example.lab8.Daos.CancionDao;
+import com.example.lab8.Daos.ListaPersonalizadaDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,12 +20,22 @@ public class CancionServlet extends HttpServlet {
 
         String action = request.getParameter("a") == null? "inicio" : request.getParameter("a");
         CancionDao cancionDao = new CancionDao();
+        ListaPersonalizadaDao listaPersonalizadaDao = new ListaPersonalizadaDao();
+
         switch (action){
             case "inicio" -> {
                 request.setAttribute("listaCanciones",cancionDao.obtenerTodasCanciones());
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("listaCanciones.jsp");
                 requestDispatcher.forward(request,response);
+            }
+            case "agregarlista"->{
+                String id = request.getParameter("id");
+                Cancion idCancion = cancionDao.buscarPorId(id);
+                request.setAttribute("idCancion",idCancion);
+                request.setAttribute("listas",listaPersonalizadaDao.obtenerListas());
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("agregarCancionLista.jsp");
+                requestDispatcher.forward(request, response);
             }
         }
 
@@ -51,6 +62,13 @@ public class CancionServlet extends HttpServlet {
                 String id = request.getParameter("id");
                 cancionDao.favorito(id);
                 response.sendRedirect(request.getContextPath() + "/listaFavoritos");
+            }
+
+            case "guardarlista" ->{
+                String idCancion= request.getParameter("idCancion");
+                String idListaP= request.getParameter("idLista");
+                cancionDao.agregarCancionLista(Integer.parseInt(idCancion),Integer.parseInt(idListaP));
+                response.sendRedirect(request.getContextPath() + "/listaCanciones");
             }
 
         }

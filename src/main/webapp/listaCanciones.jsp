@@ -40,6 +40,7 @@
                         <th>CANCION</th>
                         <th>BANDA</th>
                         <th>AGREGAR FAVORITOS</th>
+                        <th>AGREGAR LISTA PERSONALIZADA</th>
                     </thead>
                     <%
                         for (Cancion cancion : listaCanciones) {
@@ -49,9 +50,11 @@
                         <td><%=cancion.getIdcancion()%></td>
                         <td><%=cancion.getCancion()%></td>
                         <td><%=cancion.getBanda()%></td>
-                        <td><input type="hidden" name="idCancion" id="idCancion" value="<%=cancion.getIdcancion()%>"><button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <td><input type="hidden" name="idCancion" id="idCancion" value="<%=cancion.getIdcancion()%>"><button style="background-color: green" type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
                             (♡)
                         </button></td>
+                        <td><a href="<%=request.getContextPath()%>/listaCanciones?a=agregarlista&id=<%=cancion.getIdcancion()%>"
+                               class="btn btn-primary" style="background-color: green">(+)</a></td>
                     </tr>
                     </form>
                     <%

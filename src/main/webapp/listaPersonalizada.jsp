@@ -17,17 +17,20 @@
                     </div>
                 </div>
             </div>
+            <form method="POST" action="<%=request.getContextPath()%>/ListasPersonalizada?a=guardar">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Crear lista"
                        aria-label="Crear lista" aria-describedby="button-addon2"
-                       name="textoBuscar" value="" />
+                       name="nombre_lista" id="nombre_lista" />
                 <button class="btn btn-outline-info" type="submit" id="button-addon2">Crear</button>
             </div>
+            </form>
             <div class="tabla">
                 <table class="table table-dark table-transparent table-hover">
                     <thead>
                         <th>#</th>
                         <th>Nombre Lista</th>
+                        <th>Canciones en la lista</th>
                     </thead>
                     <%
                         for (ListaPersonalizada lista : listaPersonalizada) {
@@ -35,6 +38,8 @@
                         <tr>
                             <td><%=lista.getIdLista()%></td>
                             <td><%=lista.getNombre_lista()%></td>
+                            <td><a href="<%=request.getContextPath()%>/ListasPersonalizada?a=verCanciones&id=<%=lista.getIdLista()%>"
+                                   class="btn btn-primary">Ver Canciones</a></td>
                         </tr>
                     <%
                         } %>

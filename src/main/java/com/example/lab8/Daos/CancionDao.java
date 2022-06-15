@@ -156,5 +156,53 @@ public class CancionDao {
 
     }
 
+    public void agregarCancionLista(int idCancion, int idListaP) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "UPDATE cancion SET id_listapersonalizada = ?  WHERE idcancion = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+            pstmt.setInt(1, idCancion);
+            pstmt.setInt(2, idListaP);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public Cancion buscarPorId(String id) {
+        Cancion cancion = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select idcancion from cancion where idcancion = ? ";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    cancion = new Cancion();
+                    cancion.setIdcancion(rs.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return cancion;
+    }
+
 
 }
