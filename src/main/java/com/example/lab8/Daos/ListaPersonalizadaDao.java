@@ -35,4 +35,59 @@ public class ListaPersonalizadaDao {
         }
         return lista;
     }
+
+    public void crearLista(String nombre_lista) {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "INSERT INTO lista_personalizada (nombre_lista) VALUES (?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, nombre_lista);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Cancion> verCanciones(String id_lista) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ArrayList<Cancion> listaCanciones = new ArrayList<>();
+
+        String sql = "select idcancion, nombre_cancion, banda, l.nombre_lista from cancion c, lista_personalizada l\n" +
+                "where c.id_listapersonalizada=l.idlista_personalizada\n" +
+                "      and c.id_listapersonalizada = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, Integer.parseInt(id_lista));
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    Cancion cancion = new Cancion();
+                    cancion.setIdcancion(rs.getInt(1));
+                    cancion.setCancion(rs.getString(2));
+                    cancion.setBanda(rs.getString(3));
+                    cancion.setNombre_lista(rs.getString(4));
+                    listaCanciones.add(cancion);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaCanciones;
+    }
 }
